@@ -66,8 +66,11 @@ border-bottom: 1px solid #eaeaea;
   cursor: pointer;
 }
 .sneakers {
+  display:flex;
+  flex-wrap: wrap;
   div {
     margin-right: 10px;
+    margin-bottom: 10px;
   }
 }
 .search-block {
