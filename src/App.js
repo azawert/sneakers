@@ -1,6 +1,6 @@
 import Card from "./Components/Card";
-import Cart from "./Components/Cart";
-import Header from "./Components/Header";
+import Cart from "./Components/Cart/Cart";
+import Header from "./Components/Header/Header";
 const arr = [
     {
         name:'Кроссовки Puma X Aka Boku Future Rider',
@@ -15,6 +15,7 @@ const arr = [
 ]
 
 function App() {
+
     return (
         <div className='wrapper clear'>
             <Cart/>
@@ -30,7 +31,7 @@ function App() {
 
 
                 <div className='sneakers d-flex justify-center'>
-                    {arr.map(element=><Card name={element.name} img={element.img} price={element.price}/>)}
+                    {arr.map(element=><Card name={element.name} img={element.img} price={element.price} onClick={() => {console.log(element)}}/>)}
                 </div>
             </div>
         </div>
