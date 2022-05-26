@@ -31,7 +31,8 @@ function App() {
 
 
                 <div className='sneakers d-flex justify-center'>
-                    {arr.map(element=><Card name={element.name} img={element.img} price={element.price} onClick={() => {console.log(element)}}/>)}
+                    {arr.map(element=><Card name={element.name} img={element.img} price={element.price} onClickFavourite={() => {console.log('Добавлено в закладки')}}
+                      addToCart={()=>{console.log('добавлено в корзину')}}/>)}
                 </div>
             </div>
         </div>

@@ -3,7 +3,7 @@ const Card = (props) => {
     return (
         <div className={styles.card}>
             <div className={styles.favourite}>
-                <img src='img/heartdislike.svg'/>
+                <img onClick={props.onClickFavourite} src='img/heartdislike.svg'/>
             </div>
             <img width={133} height={112} src={props.img} />
             <h5>{props.name}</h5>
@@ -12,7 +12,7 @@ const Card = (props) => {
                     <span>Цена:</span>
                     <b>{props.price}</b>
                 </div>
-                <button className='button' onClick={props.onClick}><img src='/img/buttonunchecked.svg'/></button>
+                <button className='button' onClick={props.addToCart}><img src='/img/buttonunchecked.svg'/></button>
             </div>
         </div>
     )
