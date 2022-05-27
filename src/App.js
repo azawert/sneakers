@@ -1,3 +1,4 @@
+import React from 'react';
 import Card from "./Components/Card";
 import Cart from "./Components/Cart/Cart";
 import Header from "./Components/Header/Header";
@@ -18,6 +19,7 @@ function App() {
 
     return (
         <div className='wrapper clear'>
+
             <Cart/>
             <Header/>
             <div className='content p-40'>
