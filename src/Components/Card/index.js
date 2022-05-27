@@ -9,7 +9,6 @@ const Card = (props) => {
     const addedToFav = () => {
         setFav(!isAddedToFav);
     }
-
     return (
         <div className={styles.card}>
             <div className={styles.favourite}>

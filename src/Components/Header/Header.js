@@ -11,7 +11,7 @@ const Header = (props) => {
         </div>
 
         <ul className='d-flex'>
-            <li className='mr-30 d-flex align-center'>
+            <li className='mr-30 d-flex align-center cu-p' onClick={props.onCartClick}>
                 <img src='img/cart.svg' className='mr-10' />
                 <span>1205 руб.</span>
             </li>
