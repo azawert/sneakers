@@ -1,13 +1,15 @@
 import React from "react";
 import styles from './Card.module.scss'
-const Card = ({addToCart,img,name,price}) => {
+const Card = ({addToCart,img,name,price,id,addToFavourite,favourited = false}) => {
     let [isAdded, setIsAdded] = React.useState(false);
-    let [isAddedToFav,setFav] = React.useState(false);
+    let [isAddedToFav,setFav] = React.useState(favourited);
     const addedToCart = () => {
         (!isAdded && addToCart({img,name,price}))
         setIsAdded(!isAdded);
     }
     const addedToFav = () => {
+
+        (addToFavourite({img,name,price,id}))
         setFav(!isAddedToFav);
     }
     return (
