@@ -1,6 +1,6 @@
 import Card from "../Components/Card";
 import React from 'react'
-function Home({sneakers,searchValue,onChangeSearchInput,setSearchValue,onAddToCart,onAddToFavourites}){
+function Home({sneakers,searchValue,onChangeSearchInput,setSearchValue,onAddToCart,onAddToFavourites,sneakersInCart}){
     return (
         <div className='content p-40'>
             <div className='d-flex align-center justify-between mb-40'>
@@ -16,7 +16,7 @@ function Home({sneakers,searchValue,onChangeSearchInput,setSearchValue,onAddToCa
             <div className='sneakers d-flex justify-center'>
                 {sneakers.filter(element=>element.name.toLowerCase().includes(searchValue.toLowerCase())).map(element=><Card
                     key={element.img}
-
+                    added={sneakersInCart.some(item => Number(item.id) ===Number(element.id) )}
                     addToFavourite={(sneaker) => {onAddToFavourites(sneaker)}}
                     addToCart={(sneaker)=>{onAddToCart(sneaker)}}
                     {...element}

@@ -15,10 +15,17 @@ function App() {
     const [cartOpened,setCart] = React.useState(false);
 
     React.useEffect(()=>{
-        axios.get('https://6290d5cc665ea71fe13bc34b.mockapi.io/sneakers').then(res=>setSneakers(res.data));
-        axios.get('https://6290d5cc665ea71fe13bc34b.mockapi.io/cart').then(res=>setSneakersInCart(res.data));
-        axios.get('https://6290d5cc665ea71fe13bc34b.mockapi.io/favourites').then(res=>setFavourites(res.data));
+        async function fetchData(){
+            const sneakersItems = await axios.get('https://6290d5cc665ea71fe13bc34b.mockapi.io/sneakers')
+            const cartItems = await axios.get('https://6290d5cc665ea71fe13bc34b.mockapi.io/cart')
+            const favItems = await axios.get('https://6290d5cc665ea71fe13bc34b.mockapi.io/favourites')
 
+            setSneakers(sneakersItems.data)
+            setSneakersInCart(cartItems.data)
+            setFavourites(favItems.data)
+
+        }
+        fetchData();
     },[])
     const onAddToCart = (sneaker) => {
         console.log(sneaker)
@@ -69,7 +76,8 @@ function App() {
                 <Route path='/' exact
                        element=
                            {
-                                      <Home sneakers={sneakers} searchValue={searchValue} setSearchValue={setSearchValue} onChangeSearchInput={onChangeSearchInput} onAddToFavourites={onAddToFavourites} onAddToCart={onAddToCart}/>}>
+                                      <Home sneakers={sneakers} searchValue={searchValue} setSearchValue={setSearchValue} onChangeSearchInput={onChangeSearchInput} onAddToFavourites={onAddToFavourites} onAddToCart={onAddToCart}
+                                       sneakersInCart={sneakersInCart}/>}>
 
                 </Route>
                 <Route path='/favourites' element={<Favourites sneakers={favourites} onAddToFavourites={onAddToFavourites} />}></Route>
