@@ -1,10 +1,10 @@
 import React from "react";
 import styles from './Card.module.scss'
-const Card = ({addToCart,img,name,price,id,addToFavourite,favourited = false}) => {
-    let [isAdded, setIsAdded] = React.useState(false);
+const Card = ({addToCart,img,name,price,id,addToFavourite,favourited = false,checked = false}) => {
+    let [isAdded, setIsAdded] = React.useState(checked);
     let [isAddedToFav,setFav] = React.useState(favourited);
     const addedToCart = () => {
-        (!isAdded && addToCart({img,name,price}))
+        (addToCart({id,img,name,price}))
         setIsAdded(!isAdded);
     }
     const addedToFav = () => {

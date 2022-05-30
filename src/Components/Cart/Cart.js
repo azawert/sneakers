@@ -12,7 +12,7 @@ const Cart = ({onClose,sneakers,onRemove}) => {
                 sneakers.length>0 ? <div className={styles.items}>
                     {
                         sneakers.map(sneaker => (
-                            <div className={styles.cartItem}>
+                            <div key={sneaker.id} className={styles.cartItem}>
                                 <div
                                     style={{backgroundImage:`url(${sneaker.img})`}} className={styles.cartItemImg}></div>
                                 <div className='mr-20 flex'>

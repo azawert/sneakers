@@ -21,8 +21,21 @@ function App() {
 
     },[])
     const onAddToCart = (sneaker) => {
-        axios.post('https://6290d5cc665ea71fe13bc34b.mockapi.io/cart',sneaker)
-        setSneakersInCart((prev)=>[...prev,sneaker])
+        console.log(sneaker)
+        try{
+            if(sneakersInCart.find((cartObj)=> Number(cartObj.id) === Number(sneaker.id))){
+                setSneakersInCart(prev => prev.filter(item=> item.id !== sneaker.id))
+                axios.delete(`https://6290d5cc665ea71fe13bc34b.mockapi.io/cart/${sneaker.id}`)
+                console.log(sneaker.id)
+                // axios.delete(`https://6290d5cc665ea71fe13bc34b.mockapi.io/favourites/${sneaker.id}`)
+            } else {
+                axios.post('https://6290d5cc665ea71fe13bc34b.mockapi.io/cart',sneaker)
+                setSneakersInCart((prev)=>[...prev,sneaker])
+            }
+
+        } catch (error) {
+            alert('Не удалось добавить в корзину!')
+        }
     }
     const onRemoveSneaker = (id) => {
         axios.delete(`https://6290d5cc665ea71fe13bc34b.mockapi.io/cart/${id}`)
