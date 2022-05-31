@@ -31,8 +31,9 @@ function App() {
         console.log(sneaker)
         try{
             if(sneakersInCart.find((cartObj)=> Number(cartObj.id) === Number(sneaker.id))){
-                setSneakersInCart(prev => prev.filter(item=> item.id !== sneaker.id))
                 axios.delete(`https://6290d5cc665ea71fe13bc34b.mockapi.io/cart/${sneaker.id}`)
+                setSneakersInCart(prev => prev.filter(item=> item.id !== sneaker.id))
+
                 console.log(sneaker.id)
                 // axios.delete(`https://6290d5cc665ea71fe13bc34b.mockapi.io/favourites/${sneaker.id}`)
             } else {

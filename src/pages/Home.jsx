@@ -16,7 +16,7 @@ function Home({sneakers,searchValue,onChangeSearchInput,setSearchValue,onAddToCa
             <div className='sneakers d-flex justify-center'>
                 {sneakers.filter(element=>element.name.toLowerCase().includes(searchValue.toLowerCase())).map(element=><Card
                     key={element.img}
-                    added={sneakersInCart.some(item => Number(item.id) ===Number(element.id) )}
+                    added={sneakersInCart.some(item => item.img===element.img )}
                     addToFavourite={(sneaker) => {onAddToFavourites(sneaker)}}
                     addToCart={(sneaker)=>{onAddToCart(sneaker)}}
                     {...element}
