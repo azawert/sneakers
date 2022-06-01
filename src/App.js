@@ -7,15 +7,19 @@ import {Routes, Route} from "react-router-dom";
 import Home from "./pages/Home";
 import Favourites from "./pages/Favourites";
 
+const AppContext = React.createContext({})
+
 function App() {
     const [sneakers,setSneakers] = React.useState([]);
     const [sneakersInCart,setSneakersInCart] = React.useState([]);
     const [searchValue,setSearchValue] = React.useState('');
     const [favourites,setFavourites] = React.useState([]);
     const [cartOpened,setCart] = React.useState(false);
+    const [isLoading,setIsLoading] = React.useState(true);
 
     React.useEffect(()=>{
         async function fetchData(){
+            setIsLoading(true)
             const sneakersItems = await axios.get('https://6290d5cc665ea71fe13bc34b.mockapi.io/sneakers')
             const cartItems = await axios.get('https://6290d5cc665ea71fe13bc34b.mockapi.io/cart')
             const favItems = await axios.get('https://6290d5cc665ea71fe13bc34b.mockapi.io/favourites')
@@ -23,7 +27,7 @@ function App() {
             setSneakers(sneakersItems.data)
             setSneakersInCart(cartItems.data)
             setFavourites(favItems.data)
-
+            setIsLoading(false)
         }
         fetchData();
     },[])
@@ -78,7 +82,7 @@ function App() {
                        element=
                            {
                                       <Home sneakers={sneakers} searchValue={searchValue} setSearchValue={setSearchValue} onChangeSearchInput={onChangeSearchInput} onAddToFavourites={onAddToFavourites} onAddToCart={onAddToCart}
-                                       sneakersInCart={sneakersInCart}/>}>
+                                       sneakersInCart={sneakersInCart} isLoading={isLoading}/>}>
 
                 </Route>
                 <Route path='/favourites' element={<Favourites sneakers={favourites} onAddToFavourites={onAddToFavourites} />}></Route>

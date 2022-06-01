@@ -1,6 +1,18 @@
 import Card from "../Components/Card";
 import React from 'react'
-function Home({sneakers,searchValue,onChangeSearchInput,setSearchValue,onAddToCart,onAddToFavourites,sneakersInCart}){
+function Home({sneakers,searchValue,onChangeSearchInput,setSearchValue,onAddToCart,onAddToFavourites,sneakersInCart,isLoading}){
+    const renderSneakers = () => {
+        const filteredItems = sneakers && sneakers.filter(sneaker=>sneaker.name.toLowerCase().includes(searchValue.toLowerCase()))
+       return isLoading ? [...Array(10)]: filteredItems.map((element)=>
+           <Card
+            key={element.img}
+            added={sneakersInCart.some(item => item.img===element.img )}
+            addToFavourite={(sneaker) => {onAddToFavourites(sneaker)}}
+            addToCart={(sneaker)=>{onAddToCart(sneaker)}}
+            loading={false}
+            {...element}
+        />)
+    }
     return (
         <div className='content p-40'>
             <div className='d-flex align-center justify-between mb-40'>
@@ -14,13 +26,7 @@ function Home({sneakers,searchValue,onChangeSearchInput,setSearchValue,onAddToCa
 
 
             <div className='sneakers d-flex justify-center'>
-                {sneakers.filter(element=>element.name.toLowerCase().includes(searchValue.toLowerCase())).map(element=><Card
-                    key={element.img}
-                    added={sneakersInCart.some(item => item.img===element.img )}
-                    addToFavourite={(sneaker) => {onAddToFavourites(sneaker)}}
-                    addToCart={(sneaker)=>{onAddToCart(sneaker)}}
-                    {...element}
-                />)}
+                {renderSneakers()}
             </div>
         </div>
     )
