@@ -1,12 +1,13 @@
 import React from "react";
 import styles from './Card.module.scss'
-import ContentLoader from "react-content-loader";
-const Card = ({addToCart,img,name,price,id,addToFavourite,favourited = false,added = false}) => {
-    let [isAdded, setIsAdded] = React.useState(added);
+import AppContext from "../../context/context";
+const Card = ({addToCart,img,name,price,id,addToFavourite,favourited = false}) => {
+
+    const {isItemAdded} = React.useContext(AppContext)
     let [isAddedToFav,setFav] = React.useState(favourited);
+    console.log(name, isItemAdded(img))
     const addedToCart = () => {
         (addToCart({id,img,name,price}))
-        setIsAdded(!isAdded);
     }
     const addedToFav = () => {
 
@@ -25,7 +26,7 @@ const Card = ({addToCart,img,name,price,id,addToFavourite,favourited = false,add
                             <span>Цена:</span>
                             <b>{price}</b>
                         </div>
-                        <button className='button' onClick={addedToCart  }><img src={isAdded ? "/img/buttonchecked.svg": '/img/buttonunchecked.svg'}/></button>
+                        <button className='button' onClick={addedToCart  }><img src={isItemAdded(img) ? "/img/buttonchecked.svg": '/img/buttonunchecked.svg'}/></button>
                     </div>
         </div>
     )

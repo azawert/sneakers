@@ -6,8 +6,7 @@ import axios from 'axios';
 import {Routes, Route} from "react-router-dom";
 import Home from "./pages/Home";
 import Favourites from "./pages/Favourites";
-
-const AppContext = React.createContext({})
+import AppContext from "./context/context";
 
 function App() {
     const [sneakers,setSneakers] = React.useState([]);
@@ -72,22 +71,27 @@ function App() {
         setSearchValue(e.target.value)
     }
 
+    const isItemAdded = (img) => {
+        return sneakersInCart.some((obj)=> obj.img===(img))
+    }
     return (
 
-        <div className='wrapper clear'>
-            {cartOpened && <Cart sneakers={sneakersInCart} onClose={() => setCart(false)} onRemove={onRemoveSneaker}/>}
-            <Header onCartClick={() => setCart(true)}/>
-            <Routes>
-                <Route path='/' exact
-                       element=
-                           {
-                                      <Home sneakers={sneakers} searchValue={searchValue} setSearchValue={setSearchValue} onChangeSearchInput={onChangeSearchInput} onAddToFavourites={onAddToFavourites} onAddToCart={onAddToCart}
-                                       sneakersInCart={sneakersInCart} isLoading={isLoading}/>}>
+        <AppContext.Provider value={{sneakers, sneakersInCart,searchValue,favourites,isItemAdded, setCart,setSneakersInCart}}>
+            <div className='wrapper clear'>
+                {cartOpened && <Cart sneakers={sneakersInCart} onClose={() => setCart(false)} onRemove={onRemoveSneaker}/>}
+                <Header onCartClick={() => setCart(true)}/>
+                <Routes>
+                    <Route path='/' exact
+                           element=
+                               {
+                                   <Home sneakers={sneakers} searchValue={searchValue} setSearchValue={setSearchValue} onChangeSearchInput={onChangeSearchInput} onAddToFavourites={onAddToFavourites} onAddToCart={onAddToCart}
+                                         sneakersInCart={sneakersInCart} isLoading={isLoading}/>}>
 
-                </Route>
-                <Route path='/favourites' element={<Favourites sneakers={favourites} onAddToFavourites={onAddToFavourites} />}></Route>
-            </Routes>
-        </div>
+                    </Route>
+                    <Route path='/favourites' element={<Favourites onAddToFavourites={onAddToFavourites} />}></Route>
+                </Routes>
+            </div>
+        </AppContext.Provider>
 
     );
 }

@@ -2,15 +2,17 @@ import React from 'react'
 import Card from "../Components/Card";
 import '../index.scss'
 import {Link} from 'react-router-dom'
-function Favourites({sneakers,onAddToFavourites}){
-
+import AppContext from "../context/context";
+function Favourites({onAddToFavourites}){
+    const {favourites} = React.useContext(AppContext);
+    console.log();
     return (
         <div className='content p-40'>
             <div className='d-flex align-center justify-between mb-40'>
             <h1>Мои закладки</h1>
             </div>
-            {sneakers.length>0?<div className='sneakers d-flex justify-center'>
-                {sneakers.map(element=><Card
+            {favourites.length>0?<div className='sneakers d-flex justify-center'>
+                {favourites.map(element=><Card
                     key={element.img}
                     favourited={true}
                     addToFavourite={(element)=>onAddToFavourites(element)}

@@ -1,14 +1,16 @@
 import Card from "../Components/Card";
 import React from 'react';
 import ContentLoader from "react-content-loader";
+import AppContext from "../context/context";
 function Home({sneakers,searchValue,onChangeSearchInput,setSearchValue,onAddToCart,onAddToFavourites,sneakersInCart,isLoading}){
-    const arr =[...Array(6)];
+    const {isItemAdded} = React.useContext(AppContext);
+    const arr =[...Array(10)];
     const newArr = arr.map(el=> {
         return <ContentLoader
             speed={2}
             width={205}
             height={295}
-            viewBox="0 0 155 265"
+            viewBox="0 0 205 295"
             backgroundColor="#f3f3f3"
             foregroundColor="#ecebeb"
         >
@@ -24,7 +26,7 @@ function Home({sneakers,searchValue,onChangeSearchInput,setSearchValue,onAddToCa
        return isLoading ? newArr : filteredItems.map((element)=>
            <Card
             key={element.img}
-            added={sneakersInCart.some(item => item.img===element.img )}
+            
             addToFavourite={(sneaker) => {onAddToFavourites(sneaker)}}
             addToCart={(sneaker)=>{onAddToCart(sneaker)}}
             loading={false}

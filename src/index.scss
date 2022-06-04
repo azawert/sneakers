@@ -91,5 +91,22 @@ border-bottom: 1px solid #eaeaea;
       background: darken(#9dd558,10%);
     }
 }}
+.greenButton {
+  &:disabled {
+    background: #bebebe;
+    animation: button-loading .6s ease-in-out;
+  }
+}
 
 
+@keyframes button-loading {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
