@@ -5,7 +5,6 @@ const Card = ({addToCart,img,name,price,id,addToFavourite,favourited = false}) =
 
     const {isItemAdded} = React.useContext(AppContext)
     let [isAddedToFav,setFav] = React.useState(favourited);
-    console.log(name, isItemAdded(img))
     const addedToCart = () => {
         (addToCart({id,img,name,price}))
     }

@@ -12,7 +12,8 @@ const Cart = ({onClose,sneakers,onRemove}) => {
     const [orderId,setOrderId] = React.useState(null);
     const [isOrderCompleted,setIsOrderCompleted] = React.useState(false);
     const [isLoading,setIsLoading] = React.useState(false);
-
+    const sum = sneakersInCart.reduce((sum,obj)=>sum+obj.price,0);
+    const nalog = Math.floor(sum * 0.05);
     const onClickOrder = async () => {
         try {
             setIsLoading(true)
@@ -64,12 +65,12 @@ const Cart = ({onClose,sneakers,onRemove}) => {
                             <li className='d-flex justify-between mb-10'>
                                 <span>Итого:</span>
                                 <div></div>
-                                <b>21 498 руб. </b>
+                                <b>{sum} руб. </b>
                             </li>
                             <li className='d-flex justify-between'>
                                 <span>Налог 5%:</span>
                                 <div></div>
-                                <b>1074 руб. </b>
+                                <b>{nalog} руб. </b>
                             </li>
                         </ul>
 

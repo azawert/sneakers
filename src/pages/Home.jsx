@@ -26,7 +26,6 @@ function Home({sneakers,searchValue,onChangeSearchInput,setSearchValue,onAddToCa
        return isLoading ? newArr : filteredItems.map((element)=>
            <Card
             key={element.img}
-            
             addToFavourite={(sneaker) => {onAddToFavourites(sneaker)}}
             addToCart={(sneaker)=>{onAddToCart(sneaker)}}
             loading={false}

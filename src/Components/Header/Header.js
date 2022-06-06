@@ -1,7 +1,10 @@
 import styles from './Header.module.scss'
 import {Link} from 'react-router-dom'
-
+import AppContext from "../../context/context";
+import React from 'react';
 const Header = (props) => {
+    const {sneakersInCart} = React.useContext(AppContext);
+    const sum = (sneakersInCart.reduce((sum,obj)=>sum+obj.price,0));
     return <header className='d-flex justify-between align-center p-40'>
         <div className='d-flex align-center'>
             <Link to='/'>
@@ -16,7 +19,7 @@ const Header = (props) => {
         <ul className='d-flex'>
             <li className='mr-30 d-flex align-center cu-p' onClick={props.onCartClick}>
                 <img src='img/cart.svg' className='mr-10' />
-                <span>1205 руб.</span>
+                <span>{sum} руб.</span>
             </li>
             <li>
                 <Link to='/favourites'>
