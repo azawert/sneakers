@@ -4,6 +4,7 @@ import Info from "../Info";
 import AppContext from "../../context/context";
 import axios from "axios";
 import '../../index.scss'
+import {useCart} from "../../hooks/useCart";
 
 const delay = () => new Promise((resolve)=> setTimeout(resolve,1000));
 
@@ -12,8 +13,7 @@ const Cart = ({onClose,sneakers,onRemove}) => {
     const [orderId,setOrderId] = React.useState(null);
     const [isOrderCompleted,setIsOrderCompleted] = React.useState(false);
     const [isLoading,setIsLoading] = React.useState(false);
-    const sum = sneakersInCart.reduce((sum,obj)=>sum+obj.price,0);
-    const nalog = Math.floor(sum * 0.05);
+    const {sum} = useCart();
     const onClickOrder = async () => {
         try {
             setIsLoading(true)
@@ -70,7 +70,7 @@ const Cart = ({onClose,sneakers,onRemove}) => {
                             <li className='d-flex justify-between'>
                                 <span>Налог 5%:</span>
                                 <div></div>
-                                <b>{nalog} руб. </b>
+                                <b>{Math.floor(sum*0.05)} руб. </b>
                             </li>
                         </ul>
 

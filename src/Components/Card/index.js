@@ -16,7 +16,7 @@ const Card = ({addToCart,img,name,price,id,addToFavourite,favourited = false}) =
     return (
         <div className={styles.card}>
                     <div className={styles.favourite}>
-                        <img onClick={addedToFav} src={isAddedToFav ?'img/heartlike.svg' : 'img/heartdislike.svg'}/>
+                        {addToFavourite && <img onClick={addedToFav} src={isAddedToFav ?'img/heartlike.svg' : 'img/heartdislike.svg'}/>}
                     </div>
                     <img width={133} height={112} src={img} />
                     <h5>{name}</h5>
@@ -25,7 +25,7 @@ const Card = ({addToCart,img,name,price,id,addToFavourite,favourited = false}) =
                             <span>Цена:</span>
                             <b>{price}</b>
                         </div>
-                        <button className='button' onClick={addedToCart  }><img src={isItemAdded(img) ? "/img/buttonchecked.svg": '/img/buttonunchecked.svg'}/></button>
+                        <button className='button' onClick={addedToCart  }>{addToCart && <img src={isItemAdded(img) ? "/img/buttonchecked.svg": '/img/buttonunchecked.svg'}/>}</button>
                     </div>
         </div>
     )

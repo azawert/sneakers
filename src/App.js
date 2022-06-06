@@ -1,6 +1,7 @@
 import React from 'react';
 import Cart from "./Components/Cart/Cart";
 import Header from "./Components/Header/Header";
+import Orders from "./pages/Orders";
 import './index.scss'
 import axios from 'axios';
 import {Routes, Route} from "react-router-dom";
@@ -15,6 +16,7 @@ function App() {
     const [favourites,setFavourites] = React.useState([]);
     const [cartOpened,setCart] = React.useState(false);
     const [isLoading,setIsLoading] = React.useState(true);
+
 
     React.useEffect(()=>{
         async function fetchData(){
@@ -89,6 +91,7 @@ function App() {
 
                     </Route>
                     <Route path='/favourites' element={<Favourites onAddToFavourites={onAddToFavourites} />}></Route>
+                    <Route path='/orders' element={<Orders/>}></Route>
                 </Routes>
             </div>
         </AppContext.Provider>
