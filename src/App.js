@@ -20,15 +20,20 @@ function App() {
 
     React.useEffect(()=>{
         async function fetchData(){
-            setIsLoading(true)
-            const sneakersItems = await axios.get('https://6290d5cc665ea71fe13bc34b.mockapi.io/sneakers')
-            const cartItems = await axios.get('https://6290d5cc665ea71fe13bc34b.mockapi.io/cart')
-            const favItems = await axios.get('https://6290d5cc665ea71fe13bc34b.mockapi.io/favourites')
+            try {
 
-            setSneakers(sneakersItems.data)
-            setSneakersInCart(cartItems.data)
-            setFavourites(favItems.data)
-            setIsLoading(false)
+                setIsLoading(true)
+                const sneakersItems = await axios.get('https://6290d5cc665ea71fe13bc34b.mockapi.io/sneakers')
+                const cartItems = await axios.get('https://6290d5cc665ea71fe13bc34b.mockapi.io/cart')
+                const favItems = await axios.get('https://6290d5cc665ea71fe13bc34b.mockapi.io/favourites')
+
+                setSneakers(sneakersItems.data)
+                setSneakersInCart(cartItems.data)
+                setFavourites(favItems.data)
+                setIsLoading(false)
+            } catch (error) {
+                alert(error)
+            }
         }
         fetchData();
     },[])
@@ -80,7 +85,9 @@ function App() {
 
         <AppContext.Provider value={{sneakers, sneakersInCart,searchValue,favourites,isItemAdded, setCart,setSneakersInCart}}>
             <div className='wrapper clear'>
-                {cartOpened && <Cart sneakers={sneakersInCart} onClose={() => setCart(false)} onRemove={onRemoveSneaker}/>}
+                    {cartOpened && <Cart sneakers={sneakersInCart} onClose={() => setCart(false)} onRemove={onRemoveSneaker}
+                    opened={true}/>}
+
                 <Header onCartClick={() => setCart(true)}/>
                 <Routes>
                     <Route path='/' exact

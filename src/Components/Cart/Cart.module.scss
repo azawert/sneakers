@@ -6,6 +6,7 @@
   height:100%;
   z-index: 1;
   background-color: rgba(0,0,0,0.5) ;
+  visibility: hidden;
 }
 
 
@@ -161,6 +162,10 @@
 
     }
   }
+}
+
+.overlayVisible {
+  visibility: visible;
 }
 
 @keyframes button-loading {

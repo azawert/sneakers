@@ -8,7 +8,7 @@ import {useCart} from "../../hooks/useCart";
 
 const delay = () => new Promise((resolve)=> setTimeout(resolve,1000));
 
-const Cart = ({onClose,sneakers,onRemove}) => {
+const Cart = ({onClose,sneakers,onRemove,opened}) => {
     const {sneakersInCart,setSneakersInCart} = React.useContext(AppContext)
     const [orderId,setOrderId] = React.useState(null);
     const [isOrderCompleted,setIsOrderCompleted] = React.useState(false);
@@ -34,7 +34,7 @@ const Cart = ({onClose,sneakers,onRemove}) => {
         setIsLoading(false);
     }
 
-    return <div className={styles.overlay}>
+    return <div className={`${styles.overlay} ${opened ? styles.overlayVisible : '' }`}>
         <div className={styles.cart}>
             <h2 className='mb-30 d-flex justify-between align-center'>Корзина
                 <svg onClick={onClose} width="25" height="25" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
